@@ -62,6 +62,7 @@ jobs:
            - name: Cache Dependencies
              uses: actions/cache@v4.2.4
              with:
+               path: ~/.npm
                key: deps-node-modules-${{ hashFiles('**/Package-lock.json')}}
            - name: Install dependencies
              run: npm ci
