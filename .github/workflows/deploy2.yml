@@ -56,7 +56,7 @@ jobs:
            - name: get artifacts
              uses: actions/download-artifact@v5
              with:
-               name: Upload a build Artifact
+               name: build artifact
            - name: Output contents
              run: ls
            - name: Deploy code
