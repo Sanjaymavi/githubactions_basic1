@@ -33,7 +33,16 @@ jobs:
         - name: Install dependencies
           run: npm ci   
         - name: Test code
+          id: run-tests
           run: npm test
+        - name: Upload a build Artifact
+          if: failure() && steps.run-tests.outcome == 'failure'
+          uses: actions/upload-artifact@v4.6.2
+          with:
+            name: build artifact
+            path: |
+                dist
+                package.json
         - name: Db creds
           run: echo "db creds is $DB_USERNAME, and ${{ env.DB_PASSWORD }}"
    build:
@@ -50,8 +59,10 @@ jobs:
          - name: Install dependencies
            run: npm ci   
          - name: build code
+           id: run-build
            run: npm run build
          - name: Upload a build Artifact
+           if: failure() && steps.run-build.outcome == 'failure'
            uses: actions/upload-artifact@v4.6.2
            with:
               name: build artifact
