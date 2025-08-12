@@ -21,8 +21,6 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-      - name: db creds
-        run: echo "${{ db_username }}"
    Test:
       env:
         DB_USERNAME: "sanjaimavi"
