@@ -1,4 +1,3 @@
-
 name: Deployment Exercise 2
 on:
   push:
@@ -22,6 +21,9 @@ jobs:
       - name: Lint
         run: npm run lint 
    Test:
+      env:
+        DB_USERNAME: "sanjaimavi"
+        DB_PASSWORD: "sanj@1234"
       needs: lint
       runs-on: ubuntu-latest
       steps:
@@ -31,6 +33,8 @@ jobs:
           run: npm ci   
         - name: Test code
           run: npm test
+        - name: Db creds
+          run: echo "db creds is $DB_USERNAME, and ${{ env.DB_PASSWORD }}"
    build:
        needs: Test
        runs-on: ubuntu-latest
@@ -75,5 +79,6 @@ jobs:
            - name: Output contents
              run: ls
            - name: Deploy code
-             run: echo "Deploying..."
+             run: echo "DB user name is ${{ secrets.DB_USERNAME }}"
+             
  
