@@ -26,6 +26,11 @@ jobs:
           run: npm ci   
         - name: Test code
           run: npm test
+        - name: Upload Github pages Artifact
+          uses: actions/upload-pages-artifact@v3.0.1
+          with:
+            name: github pages
+            path: package.json
    deploy:
        needs: Test 
        runs-on: ubuntu-latest
