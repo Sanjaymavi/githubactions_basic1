@@ -54,7 +54,7 @@ jobs:
            - name: Build code
              run: npm run build
            - name: get artifacts
-             uses: actions/download-artifacts@v3
+             uses: actions/download-artifact@v5
              with:
                name: Upload a build Artifact
            - name: Output contents
