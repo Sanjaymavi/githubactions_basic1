@@ -35,14 +35,14 @@ jobs:
         - name: Test code
           id: run-tests
           run: npm test
-        - name: Upload a build Artifact
-          if: failure() && steps.run-tests.outcome == 'failure'
-          uses: actions/upload-artifact@v4.6.2
-          with:
-            name: build artifact
-            path: |
-                dist
-                package.json
+        # - name: Upload a build Artifact
+        #   if: failure() && steps.run-tests.outcome == 'failure'
+        #   uses: actions/upload-artifact@v4.6.2
+        #   with:
+        #     name: build artifact
+        #     path: |
+        #         dist
+        #         package.json
         - name: Db creds
           run: echo "db creds is $DB_USERNAME, and ${{ env.DB_PASSWORD }}"
    build:
@@ -58,17 +58,17 @@ jobs:
              key: deps-node-modules-${{ hashFiles('**/Package-lock.json')}}
          - name: Install dependencies
            run: npm ci   
-         - name: build code
+         - name: run-build
            id: run-build
            run: npm run build
-         # - name: Upload a build Artifact
-         #   if: failure() && steps.run-build.outcome == 'failure'
-         #   uses: actions/upload-artifact@v4.6.2
-         #   with:
-         #      name: build artifact
-         #      path: |
-         #        dist
-         #        package.json
+         - name: Upload a build Artifact
+           if: failure() && steps.run-build.outcome == 'failure'
+           uses: actions/upload-artifact@v4.6.2
+           with:
+              name: build artifact
+              path: |
+                dist
+                package.json
    deploy:
        needs: build 
        runs-on: ubuntu-latest
