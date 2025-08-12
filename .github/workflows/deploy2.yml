@@ -30,7 +30,7 @@ jobs:
           uses: actions/upload-pages-artifact@v3.0.1
           with:
             name: github pages
-            path: package.json
+            path: /package.json
    deploy:
        needs: Test 
        runs-on: ubuntu-latest
