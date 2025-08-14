@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 jobs:
    lint:
-    environment: main
+    environment: dev
     runs-on: ubuntu-latest
     steps:
       - name: Get code
